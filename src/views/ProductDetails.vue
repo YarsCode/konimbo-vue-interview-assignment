@@ -46,7 +46,6 @@ export default {
     async created() {
         this.loading = true;
         this.fetchProductById(this.$route.params.id);
-        // this.product = await this.fetchProductById(this.$route.params.id);
     },
 };
 </script>
@@ -70,7 +69,7 @@ main {
         "productImage ."
         "productImage productPrice";
     grid-area: productDetails;
-    /* width: 100%; */
+    width: 100%;
     margin: 5rem auto 0;
     padding: 3rem 15rem;
     background: #f5f5f5;
@@ -172,8 +171,8 @@ form {
         "productPrice";
         align-items: center;
         margin-top: 2rem;
+        padding: 2rem;
         border-radius: 0;
-        /* padding: 2rem; */
         text-align: center;
     }
     .product-img {

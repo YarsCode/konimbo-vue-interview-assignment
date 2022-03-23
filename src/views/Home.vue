@@ -38,6 +38,7 @@ export default {
                 );
                 const products = await res.json();
                 this.products = await products;
+                this.productsToDisplay = this.products;
                 setTimeout(() => {
                     this.loading = false;
                 }, 500);
@@ -47,32 +48,37 @@ export default {
         },
         getAvailableCategories() {
             const availableCategories = [...new Set(this.products.map((product) => product.store_category_title))]; // Removes all duplicates from the categories.
-            this.availableCategories = availableCategories
+            this.availableCategories = availableCategories;
         },
         searchByValue(value) {
+            this.isBeingFiltered = false;
+            let productsToDisplay = this.products;
+
             if (this.filteredProducts.length > 0) {
-                const productsToDisplay = this.filteredProducts.filter((product) =>
+                productsToDisplay = this.filteredProducts.filter((product) =>
                     product.title.toLowerCase().includes(value.toLowerCase())
                 );
-                this.productsToDisplay = productsToDisplay;
+            } else {
+                productsToDisplay = this.products.filter((product) =>
+                    product.title.toLowerCase().includes(value.toLowerCase())
+                );
             }
+            this.productsToDisplay = productsToDisplay;
         },
         filterByCategory(category) {
             if (category !== "all") {
-                // this.productsToDisplay = this.products.filter((product) => product.store_category_title === category);
                 this.filteredProducts = this.products.filter((product) => product.store_category_title === category);
-                this.productsToDisplay = this.filteredProducts
-                this.isBeingFiltered = true;
+                this.productsToDisplay = this.filteredProducts;
             } else {
                 this.productsToDisplay = this.products;
             }
+            this.isBeingFiltered = true;
         },
     },
     async created() {
         this.loading = true;
         await this.fetchProducts();
         this.getAvailableCategories();
-        this.productsToDisplay = this.products;
     },
 };
 </script>
@@ -94,9 +100,9 @@ main {
 @media screen and (max-width: 55rem) {
     main {
         grid-template-areas:
-        "search"
-        "categoriesSelect"
-        "products";
+            "search"
+            "categoriesSelect"
+            "products";
         width: 100%;
     }
 }

@@ -20,14 +20,14 @@ export default {
         };
     },
     methods: {
-        resetSearchIfBeingFiltered() {
-            if (this.isBeingFiltered) this.searchByValue = "";
+        clearSearchIfBeingFiltered() {
+            if(this.isBeingFiltered) this.searchByValue = "";
         },
     },
     watch: {
         'isBeingFiltered': {
             handler() {
-                this.resetSearchIfBeingFiltered()
+                this.clearSearchIfBeingFiltered()
             },
             immediate: true
         }

@@ -4,7 +4,7 @@
             name: 'ProductDetails',
             params: { id: product.id },
         }"
-        name="asd"
+        :name="product.title"
         class="product"
     >
         <h3>{{ product.title }}</h3>
@@ -31,7 +31,6 @@ export default {
     align-items: center;
     text-align: center;
     border: 1px solid rgb(0, 102, 133);
-    /* width: 100%; */
     padding: 0.5rem 2rem;
     border-radius: 8px;
     cursor: pointer;

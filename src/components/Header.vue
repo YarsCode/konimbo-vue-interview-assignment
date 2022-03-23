@@ -1,7 +1,7 @@
 <template>
     <header class="main-header">
         <div class="store-name-container">
-            <h1 class="header-store-name">{{ storeName }}</h1>
+            <h1 class="header-store-name" @click="$router.push('/')">{{ storeName }}</h1>
         </div>
     </header>
 </template>
@@ -36,8 +36,12 @@ export default {
     font-size: 2.5rem;
     color: rgb(50, 50, 50);
     text-shadow: 1px 1px 1px rgb(158, 157, 157);
+    cursor: pointer;
 }
 .header-store-name::first-letter {
     color: rgb(0, 102, 133);
+}
+.header-store-name:hover:first-letter {
+    color: rgb(0, 145, 189);
 }
 </style>

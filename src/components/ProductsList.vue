@@ -21,11 +21,9 @@ export default {
 .products {
     grid-area: products;
     display: grid;
-    /* justify-items: center; */
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin: 4rem auto;
-    /* width: 100%; */
 }
 @media (max-width: 70rem) {
     .products {
