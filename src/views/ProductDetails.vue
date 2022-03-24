@@ -2,7 +2,7 @@
     <main class="product-details-page">
         <Loader v-if="loading" />
         <div v-else class="product-details">
-            <img :src="product.images[0]?.url" alt="" class="product-img" />
+            <img :src="product.images[0]?.url" alt="No Image Found" class="product-img" />
             <h1 class="product-title">{{ product.title }}</h1>
             <h2 class="product-price">{{ product.price }}₪</h2>
         </div>
@@ -29,15 +29,11 @@ export default {
     methods: {
         async fetchProductById(id) {
             try {
-                const res = await fetch(
-                    "https://api.konimbo.co.il/v1/items?token=9c1a92bf8cefc59e4ec9fa7c53bba0f90dd8b15850bef1062dbf32c5e8fd3a08"
-                );
+                const res = await fetch(process.env.VUE_APP_API_URL);
                 const allProducts = await res.json();
                 const product = allProducts.filter((product) => product.id === id)[0];
                 this.product = await product;
-                setTimeout(() => {
-                    this.loading = false;
-                }, 500);
+                this.loading = false;
             } catch (err) {
                 console.log(err);
             }
@@ -57,7 +53,6 @@ main {
         "productDetails"
         "form";
     justify-items: center;
-    /* align-items: center; */
     position: relative;
     height: calc(100vh - 5rem);
 }
@@ -70,8 +65,7 @@ main {
         "productImage productPrice";
     grid-area: productDetails;
     width: 100%;
-    margin: 5rem auto 0;
-    padding: 3rem 15rem;
+    padding: 3rem 10rem;
     background: #f5f5f5;
 }
 .product-img {
@@ -97,9 +91,8 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
     width: 100%;
-    height: 100%;
+    margin: 2rem 0;
 }
 .form-input {
     margin: 0.5rem 0;
@@ -139,7 +132,7 @@ form {
     position: absolute;
     left: 0;
     top: 0;
-    height: calc(100vh - 5rem);
+    height: 100%;
     padding: 0 1rem;
     background: rgb(0, 132, 172);
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -158,17 +151,13 @@ form {
     background: rgb(0, 102, 133);
     color: white;
 }
-@media screen and (max-width: 57rem) {
-    .product-details {
-        padding-right: 10rem;
-    }
-}
+
 @media screen and (max-width: 53rem) {
     .product-details {
         grid-template-areas:
-        "productImage"
-        "productTitle"
-        "productPrice";
+            "productImage"
+            "productTitle"
+            "productPrice";
         align-items: center;
         margin-top: 2rem;
         padding: 2rem;

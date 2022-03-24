@@ -3,7 +3,7 @@
         type="text"
         placeholder="חיפוש..."
         v-model="searchByValue"
-        @input="$emit('search-value', this.searchByValue)"
+        @input="$store.commit('searchByValue', this.searchByValue)"
         class="search-input"
     />
 </template>
@@ -21,16 +21,16 @@ export default {
     },
     methods: {
         clearSearchIfBeingFiltered() {
-            if(this.isBeingFiltered) this.searchByValue = "";
+            if (this.isBeingFiltered) this.searchByValue = "";
         },
     },
     watch: {
-        'isBeingFiltered': {
+        isBeingFiltered: {
             handler() {
-                this.clearSearchIfBeingFiltered()
+                this.clearSearchIfBeingFiltered();
             },
-            immediate: true
-        }
+            immediate: true,
+        },
     },
     emits: ["search-value"],
 };
@@ -63,7 +63,7 @@ export default {
         box-shadow: 0px -4px 1px rgb(0, 102, 133);
     }
     .search-input:focus {
-    box-shadow: 0px -4px 4px rgb(0, 102, 133);
-}
+        box-shadow: 0px -4px 4px rgb(0, 102, 133);
+    }
 }
 </style>

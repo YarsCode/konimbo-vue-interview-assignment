@@ -8,7 +8,7 @@
         class="product"
     >
         <h3>{{ product.title }}</h3>
-        <img :src="product.images[0]?.url" alt="" class="product-img" />
+        <img :src="product.images[0]?.url" alt="No Image Found" class="product-img" />
         <h4>מחיר: ₪{{ product.price }}</h4>
     </router-link>
 </template>
@@ -27,9 +27,10 @@ export default {
     direction: rtl;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
+    min-height: 24rem;
     border: 1px solid rgb(0, 102, 133);
     padding: 0.5rem 2rem;
     border-radius: 8px;
